@@ -101,6 +101,7 @@ Layout
 
 header {
   background: #f8f8f8;
+  margin-bottom: 3em;
   padding: 2em 0;
   text-align: center;
 }
@@ -168,6 +169,17 @@ nav a:focus {
   padding-bottom: 1.5em;
 }
 
+@media (min-width: 675px) {
+  .article-featured {
+    display: flex;
+    flex-direction: column;
+  }
+  .article-featured img,
+  .article-featured .article-info {
+    order: -1;
+  }
+}
+
 .article-recent {
   display: flex;
   flex-direction: column;
@@ -178,4 +190,23 @@ nav a:focus {
 }
 .article-recent-secondary {
   order: 1;
+}
+
+@media (min-width: 675px) {
+  .article-recent {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .article-recent-main {
+    width: 68%;
+  }
+  .article-recent-secondary {
+    width: 30%;
+  }
+  .article-image {
+    width: 100%;
+    min-height: 250px;
+    object-fit: cover;
+    /* object-position: left; */
+  }
 }
