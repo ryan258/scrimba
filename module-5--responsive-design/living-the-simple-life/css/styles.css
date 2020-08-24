@@ -25,9 +25,10 @@ Typography
 h1,
 h2,
 h3 {
+  color: #143774;
   font-family: "Lora", serif;
   font-weight: 400;
-  color: #143774;
+  margin-top: 0;
 }
 
 h1 {
@@ -70,6 +71,10 @@ strong {
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.article-info {
+  margin: 2em 0;
 }
 
 .article-read-more:hover,
@@ -153,4 +158,24 @@ nav a:focus {
   nav li {
     margin: 0.5em 0;
   }
+}
+
+/* articles */
+
+.article-featured {
+  border-bottom: 1px solid #707070;
+  margin-bottom: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+.article-recent {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5em;
+}
+.article-recent-main {
+  order: 2;
+}
+.article-recent-secondary {
+  order: 1;
 }
