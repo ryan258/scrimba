@@ -18,7 +18,8 @@ h1 {
   color: #fff;
   font-size: 2.25rem;
   font-weight: 300;
-  margin: 2em 0;
+  /* margin: 2em 0; */
+  margin: 0;
 }
 
 h1 + p {
@@ -61,11 +62,14 @@ h2 + p {
 .intro {
   background-color: #404040;
   background-image: url(../images/dark-ribs.jpg);
+  background-position: center;
   background-size: cover;
   display: flex;
   flex-direction: column;
   /* height: 50vh; */
   padding: 0 0.5em 2em;
+  justify-content: space-between;
+  min-height: 50vh;
 }
 
 /* --------------
@@ -74,4 +78,45 @@ h2 + p {
 
 .main-content {
   padding: 2em 1em;
+}
+
+/* ---------------
+    Media Queries
+   --------------- */
+
+@media (min-width: 500px) {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    display: flex;
+    font-size: 1.125rem;
+    /* align-content: center; */
+    /* justify-content: center; */
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h1 + p,
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .intro,
+  .main-content {
+    min-height: 100vh;
+    width: 50%;
+  }
+  /* .main-content {
+    height: 100vh;
+    width: 40%;
+  } */
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
