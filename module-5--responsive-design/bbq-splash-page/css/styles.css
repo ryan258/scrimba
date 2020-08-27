@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Source Sans Pro", sans-serif;
@@ -12,6 +16,7 @@ body {
 
 strong {
   font-weight: 900;
+  color: #f18119;
 }
 
 h1 {
@@ -53,6 +58,10 @@ h2 + p {
   font-weight: 900;
   order: -1;
   text-transform: uppercase;
+  border-top: 5px solid #f18119;
+  border-image: linear-gradient(to left, #ff713b, #ffa51d) 1;
+  margin: 0;
+  padding-top: 2px;
 }
 
 /* ---------------
@@ -61,7 +70,8 @@ h2 + p {
 
 .intro {
   background-color: #404040;
-  background-image: url(../images/dark-ribs.jpg);
+  background-image: url(../images/ribs.jpg);
+  background-blend-mode: multiply;
   background-position: center;
   background-size: cover;
   padding: 0 0.5em 2em;
@@ -96,14 +106,72 @@ We're going to add containers */
   min-height: 50vh;
 }
 
+.container-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ------
+    Form
+   ------ */
+
+.email-collector {
+  /* border: 3px solid #f18119; */
+  width: 80%;
+  max-width: 300px;
+}
+
+input,
+.btn {
+  width: 100%;
+  border-radius: 4px;
+  padding: 0.25em;
+  text-align: center;
+}
+
+input {
+  font-family: inherit;
+  margin-bottom: 0.75em;
+  border: 1px solid #404040;
+  transform: scale(1);
+  transition: transform 250ms;
+}
+
+input:focus {
+  transform: scale(1.1);
+}
+
+.btn {
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  padding: 1em 1.5em;
+  font-size: 0.625rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary {
+  background: linear-gradient(to left, #ff713b, #ffa51d);
+  color: #fff;
+  /* transition: color 250ms; */
+  transform: scale(1);
+  transition: transform 250ms;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
 /* ---------------
     Media Queries
    --------------- */
 
 @media (min-width: 500px) {
-  * {
-    box-sizing: border-box;
-  }
   body {
     display: flex;
     font-size: 1.125rem;
