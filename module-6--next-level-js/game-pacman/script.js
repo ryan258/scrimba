@@ -818,3 +818,8 @@ function createBoard() {
 }
 
 createBoard();
+
+// Starting position of Pac-Man
+let pacmanCurrentIndex = 490;
+
+squares[pacmanCurrentIndex].classList.add("pacman");
