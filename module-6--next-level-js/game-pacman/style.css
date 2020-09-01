@@ -16,5 +16,27 @@ body {
 .grid div {
   width: 15px;
   height: 15px;
-  background-color: blue;
+  background-color: #00f;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+}
+
+.pellet {
+  background-color: green;
+  border: 5px solid #fff;
+  box-sizing: border-box;
+}
+
+.wall {
+  background-color: #00f;
+}
+
+.power-pellet {
+  background-color: #0f0;
+  border-radius: 7.5px; /* half of .grid dev h&w */
+}
+
+.pacman {
+  background-color: yellow;
+  border-radius: 7.5px;
 }
