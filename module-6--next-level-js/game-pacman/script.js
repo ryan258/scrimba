@@ -848,6 +848,9 @@ function control(e) {
         // console.log("pressed right");
         // console.log("move right");
         pacmanCurrentIndex++;
+        if (pacmanCurrentIndex === 391) {
+          pacmanCurrentIndex = 364;
+        }
       }
 
       break;
@@ -871,6 +874,9 @@ function control(e) {
         // console.log("pressed left");
         // console.log("move left");
         pacmanCurrentIndex--;
+        if (pacmanCurrentIndex === 364) {
+          pacmanCurrentIndex = 391;
+        }
       }
       break;
   }
