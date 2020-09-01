@@ -4,7 +4,7 @@ const score = document.querySelector("#score");
 let squares = [];
 
 // Create a 28x28 grid (784 squares)
-// Square Key - (0 - Pellets) (1 - Wall) (2 - Ghost Lair) (3 - Power Pellet) (4 - Empty)
+// Square Key - (0 - Pellet) (1 - Wall) (2 - Ghost Lair) (3 - Power Pellet) (4 - Empty)
 // Google Sheets can be good for making this kind of layout array
 
 const layout = [
@@ -797,10 +797,22 @@ const layout = [
 // Create the board
 function createBoard() {
   for (let i = 0; i < layout.length; i++) {
+    // create square
     const square = document.createElement("div");
-    square.classList.add(layout[i]);
+
+    // put square div in grid div
     grid.appendChild(square);
+    // push square to our new array, the one that deals with logic
     squares.push(square);
+
+    // add class to square
+    if (layout[i] === 0) {
+      squares[i].classList.add("pellet");
+    } else if (layout[i] === 1) {
+      squares[i].classList.add("wall");
+    } else if (layout[i] === 3) {
+      squares[i].classList.add("power-pellet");
+    }
   }
   console.log(squares);
 }
