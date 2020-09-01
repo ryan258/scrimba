@@ -1,0 +1,20 @@
+html,
+body {
+  margin: 10px;
+  padding: 10px;
+}
+
+/* Grid is 28x28 = 784 Squares */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 420px;
+  height: 420px;
+  border: 1px solid black;
+}
+
+.grid div {
+  width: 15px;
+  height: 15px;
+  background-color: blue;
+}
