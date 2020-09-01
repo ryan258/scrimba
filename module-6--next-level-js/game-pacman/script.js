@@ -810,6 +810,8 @@ function createBoard() {
       squares[i].classList.add("pellet");
     } else if (layout[i] === 1) {
       squares[i].classList.add("wall");
+    } else if (layout[i] === 2) {
+      squares[i].classList.add("ghost-lair");
     } else if (layout[i] === 3) {
       squares[i].classList.add("power-pellet");
     }
@@ -827,14 +829,22 @@ function control(e) {
   squares[pacmanCurrentIndex].classList.remove("pacman");
   switch (e.keyCode) {
     case 40:
-      if (pacmanCurrentIndex + width < width ** 2) {
+      if (
+        !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
+        !squares[pacmanCurrentIndex + width].classList.contains("ghost-lair") &&
+        pacmanCurrentIndex + width < width ** 2
+      ) {
         // console.log("pressed down");
         // console.log(`move down 1 or (${width}) down the array`);
         pacmanCurrentIndex += width;
       }
       break;
     case 39:
-      if (pacmanCurrentIndex % width < width - 1) {
+      if (
+        !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
+        !squares[pacmanCurrentIndex + 1].classList.contains("ghost-lair") &&
+        pacmanCurrentIndex % width < width - 1
+      ) {
         // console.log("pressed right");
         // console.log("move right");
         pacmanCurrentIndex++;
@@ -842,14 +852,22 @@ function control(e) {
 
       break;
     case 38:
-      if (pacmanCurrentIndex >= width) {
+      if (
+        !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
+        !squares[pacmanCurrentIndex - width].classList.contains("ghost-lair") &&
+        pacmanCurrentIndex >= width
+      ) {
         // console.log("pressed up");
         // console.log(`move up 1 or (${width} up the array)`);
         pacmanCurrentIndex -= width;
       }
       break;
     case 37:
-      if (pacmanCurrentIndex % width !== 0) {
+      if (
+        !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
+        !squares[pacmanCurrentIndex - 1].classList.contains("ghost-lair") &&
+        pacmanCurrentIndex % width !== 0
+      ) {
         // console.log("pressed left");
         // console.log("move left");
         pacmanCurrentIndex--;
