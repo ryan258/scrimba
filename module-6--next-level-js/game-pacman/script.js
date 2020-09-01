@@ -821,5 +821,42 @@ createBoard();
 
 // Starting position of Pac-Man
 let pacmanCurrentIndex = 490;
-
 squares[pacmanCurrentIndex].classList.add("pacman");
+
+function control(e) {
+  squares[pacmanCurrentIndex].classList.remove("pacman");
+  switch (e.keyCode) {
+    case 40:
+      if (pacmanCurrentIndex + width < width ** 2) {
+        // console.log("pressed down");
+        // console.log(`move down 1 or (${width}) down the array`);
+        pacmanCurrentIndex += width;
+      }
+      break;
+    case 39:
+      if (pacmanCurrentIndex % width < width - 1) {
+        // console.log("pressed right");
+        // console.log("move right");
+        pacmanCurrentIndex++;
+      }
+
+      break;
+    case 38:
+      if (pacmanCurrentIndex >= width) {
+        // console.log("pressed up");
+        // console.log(`move up 1 or (${width} up the array)`);
+        pacmanCurrentIndex -= width;
+      }
+      break;
+    case 37:
+      if (pacmanCurrentIndex % width !== 0) {
+        // console.log("pressed left");
+        // console.log("move left");
+        pacmanCurrentIndex--;
+      }
+      break;
+  }
+  squares[pacmanCurrentIndex].classList.add("pacman");
+}
+
+document.addEventListener("keyup", control);
