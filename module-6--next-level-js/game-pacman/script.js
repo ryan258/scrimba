@@ -1,7 +1,8 @@
 const width = 28;
 const grid = document.querySelector(".grid");
-const score = document.querySelector("#score");
+const scoreDisplay = document.getElementById("score");
 let squares = [];
+let score = 0;
 
 // Create a 28x28 grid (784 squares)
 // Square Key - (0 - Pellet) (1 - Wall) (2 - Ghost Lair) (3 - Power Pellet) (4 - Empty)
@@ -881,6 +882,16 @@ function control(e) {
       break;
   }
   squares[pacmanCurrentIndex].classList.add("pacman");
+  eatPellet();
+}
+
+function eatPellet() {
+  if (squares[pacmanCurrentIndex].classList.contains("pellet")) {
+    squares[pacmanCurrentIndex].classList.remove("pellet");
+    score++;
+    console.log(score);
+    scoreDisplay.innerHTML = score;
+  }
 }
 
 document.addEventListener("keyup", control);
