@@ -817,7 +817,7 @@ function createBoard() {
       squares[i].classList.add("power-pellet");
     }
   }
-  console.log(squares);
+  // console.log(squares);
 }
 
 createBoard();
@@ -883,6 +883,7 @@ function control(e) {
   }
   squares[pacmanCurrentIndex].classList.add("pacman");
   eatPellet();
+  powerPelletEaten();
 }
 
 document.addEventListener("keyup", control);
@@ -891,9 +892,35 @@ function eatPellet() {
   if (squares[pacmanCurrentIndex].classList.contains("pellet")) {
     squares[pacmanCurrentIndex].classList.remove("pellet");
     score++;
-    console.log(score);
+    // console.log(score);
     scoreDisplay.innerHTML = score;
   }
+}
+
+function powerPelletEaten() {
+  // if square pacman is in contains .power-pellet
+  if (squares[pacmanCurrentIndex].classList.contains("power-pellet")) {
+    // remove power pellet from square
+    squares[pacmanCurrentIndex].classList.remove("power-pellet");
+    // score + 10
+    score += 10;
+    // change each ghosts to isScared
+    ghosts.forEach((ghost) => {
+      ghost.isScared = true;
+      console.log(`${ghost.className} the ghost is scared`);
+    });
+    scoreDisplay.innerHTML = score;
+
+    //  use setTimeout to unscare ghosts after 10 seconds
+    setTimeout(unScareGhosts, 10000);
+  }
+}
+
+function unScareGhosts() {
+  ghosts.forEach((ghost) => {
+    ghost.isScared = false;
+    console.log(`${ghost.className} the ghost is scary again!`);
+  });
 }
 
 class Ghost {
@@ -927,20 +954,49 @@ function moveGhost(ghost) {
   console.log("moved ghost");
   const directions = [-1, +1, -width, +width];
   let direction = directions[Math.floor(Math.random() * directions.length)];
-  console.log(direction);
+  // console.log(direction);
 
   ghost.timerId = setInterval(function () {
+    // if next square doesn't contain another ghost or a wall
     if (
       !squares[ghost.currentIndex + direction].classList.contains("ghost") &&
       !squares[ghost.currentIndex + direction].classList.contains("wall")
     ) {
+      // remove any ghost
       squares[ghost.currentIndex].classList.remove(ghost.className);
-      squares[ghost.currentIndex].classList.remove("ghost");
+      squares[ghost.currentIndex].classList.remove("ghost", "scared-ghost");
+      // add direction to current index
       ghost.currentIndex += direction;
+      // add ghost classes
       squares[ghost.currentIndex].classList.add(ghost.className);
       squares[ghost.currentIndex].classList.add("ghost");
     } else {
       direction = directions[Math.floor(Math.random() * directions.length)];
+    }
+
+    // if ghost is currently scared
+    if (ghost.isScared) {
+      squares[ghost.currentIndex].classList.add("scared-ghost");
+    }
+
+    // if pacman and a scared ghost meet
+    if (
+      ghost.isScared &&
+      // squares[pacmanCurrentIndex] === squares[ghost.currentIndex]
+      squares[ghost.currentIndex].classList.contains("pacman")
+    ) {
+      // remove classnames - .ghost .scared-ghost .[ghost.className]
+      squares[ghost.currentIndex].classList.remove(
+        "ghost",
+        "scared-ghost",
+        ghost.className
+      );
+      // return ghost to its startingIndex
+      ghost.currentIndex = ghost.startIndex;
+      // add 100 points to score
+      score += 100;
+      // re-add .ghost .[ghost.className] to new position
+      squares[ghost.currentIndex].classList.add("ghost", ghost.className);
     }
   }, ghost.speed);
 }
