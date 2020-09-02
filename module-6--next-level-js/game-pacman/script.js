@@ -884,6 +884,8 @@ function control(e) {
   squares[pacmanCurrentIndex].classList.add("pacman");
   eatPellet();
   powerPelletEaten();
+  checkForGameOver();
+  checkForWin();
 }
 
 document.addEventListener("keyup", control);
@@ -951,7 +953,7 @@ ghosts.forEach((ghost) => {
 ghosts.forEach((ghost) => moveGhost(ghost));
 
 function moveGhost(ghost) {
-  console.log("moved ghost");
+  // console.log("moved ghost");
   const directions = [-1, +1, -width, +width];
   let direction = directions[Math.floor(Math.random() * directions.length)];
   // console.log(direction);
@@ -998,5 +1000,34 @@ function moveGhost(ghost) {
       // re-add .ghost .[ghost.className] to new position
       squares[ghost.currentIndex].classList.add("ghost", ghost.className);
     }
+    checkForGameOver();
   }, ghost.speed);
+}
+
+// check for game over
+function checkForGameOver() {
+  // if pacman and a non-scared ghosts are on the same block, game over
+  if (
+    squares[pacmanCurrentIndex].classList.contains("ghost") &&
+    !squares[pacmanCurrentIndex].classList.contains("scared-ghost")
+  ) {
+    // for each ghost, stop moving
+    ghosts.forEach((ghost) => clearInterval(ghost.timerId));
+    // remove event listener from control()
+    document.removeEventListener("keyup", control);
+    // alert use game is over
+    scoreDisplay.innerHTML = `You Lose :( <br />But hey, you got ${score} points! :D`;
+  }
+}
+
+// check for win
+function checkForWin() {
+  if (score > 99) {
+    // stop ghosts
+    ghosts.forEach((ghost) => clearInterval(ghost.timerId));
+    // remove event listener
+    document.removeEventListener("keyup", control);
+    // change score to "Winner!"
+    scoreDisplay.innerHTML = `You win!<br />Look at you and your ${score} points! 🙌`;
+  }
 }
