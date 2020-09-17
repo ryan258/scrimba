@@ -4,3 +4,32 @@ body {
   padding: 0;
   background-color: lightgreen;
 }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(5, 20%);
+  height: 100vh;
+}
+
+.board * {
+  border: 0.1rem solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.my-category-title {
+  background-color: rgb(37, 22, 121);
+  color: goldenrod;
+  font-weight: 700;
+  grid-row-start: 1;
+  text-transform: uppercase;
+  padding: 1em;
+}
+
+.my-category-clue {
+  font-size: 2rem;
+}
