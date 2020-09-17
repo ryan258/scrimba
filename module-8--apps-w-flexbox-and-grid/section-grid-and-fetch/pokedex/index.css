@@ -45,3 +45,9 @@ body {
   background-color: lightpink;
   grid-column: span 3;
 }
+
+.a-pokemon-alt-name {
+  grid-column: span 4;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
