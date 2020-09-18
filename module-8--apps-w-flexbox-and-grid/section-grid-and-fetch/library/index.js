@@ -11,6 +11,18 @@
         display all books using Flexbox
 */
 
+/* 
+    Library (Challenge)
+
+    Write a displayLibrary(books) function
+        - Add error catching
+
+    Use CSS Grid instead of Flexbox to style 
+        the library container
+        - Use a gap of 1rem
+        - Display 3 books per row
+*/
+
 async function getBooks() {
   let response = await fetch("./books.json");
   // return await response.json();
@@ -40,9 +52,18 @@ function getBookHTML(book) {
     <div class="my-book-footer"></div>
   </div>`;
 }
+// getBooks().then((books) => {
+//   document.body.innerHTML = `<div class="my-library">
+//     ${books.map(getBookHTML).join("")}
+//   </div>`;
+// });
 
-getBooks().then((books) => {
+function displayLibrary(books) {
   document.body.innerHTML = `<div class="my-library">
     ${books.map(getBookHTML).join("")}
   </div>`;
-});
+}
+
+getBooks()
+  .then(displayLibrary)
+  .catch((err) => console.log(`ERROR: ${err}`));

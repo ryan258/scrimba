@@ -9,11 +9,11 @@ body {
 /* single book */
 .my-book {
   display: grid;
-  grid-template-columns: 1rem 8rem;
+  grid-template-columns: 1rem 7rem;
   grid-template-areas:
     "spine cover"
     "footer footer";
-  margin: 0.2rem;
+  /* margin: 0.2rem; */
 }
 
 .my-book > * {
@@ -22,11 +22,11 @@ body {
 
 .my-book-cover {
   grid-area: cover;
-  height: 8rem;
+  height: 7rem;
   background-color: lightgreen;
   text-align: center;
   padding: 1rem;
-  font-size: 1.3rem;
+  /* font-size: 1.3rem; */
 }
 .my-book-spine {
   grid-area: spine;
@@ -47,8 +47,14 @@ body {
 }
 
 /* book container grid */
-
+/* 
 .my-library {
   display: flex;
   flex-wrap: wrap;
+} */
+
+.my-library {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(3, calc(100% / 3));
 }
