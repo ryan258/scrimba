@@ -1,38 +1,41 @@
 /* 
-    TV Guide
+    TV Guide (Challenge)
     
-    Write an async function called findShow(query)
-        performs a fetch call to:
-        https://api.tvmaze.com/singlesearch/shows?q=${query}&embed=seasons
-        and returns the resulting show object
-        
-    Build a layout to display the show
-        - Title
-        - Summary
-        - Seasons listed as individual divs
+    The API call is now searching ALL shows
+        instead of "singlesearch"
+    
+    Write and implement a getShowHtml(show) function
+       as well as displayShows(shows)
+       to display all of the results inside of a 
+       container with a class of my-shows
 */
 
 async function findShow(query) {
-  let response = await fetch(
-    `https://api.tvmaze.com/singlesearch/shows?q=${query}&embed=seasons`
-  );
-  let data = response.json();
+  let response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
+  let data = await response.json();
   return data;
 }
 
-findShow("office").then((show) => {
-  console.log(show);
+function getShowHTML(show) {
+  return `<div class="my-show">
+    <div class="my-show-title">
+        ${show.name}
+    </div>
+    
+    <div class="my-show-summary">
+        ${show.summary}
+    </div>
+  </div>`;
+}
 
+function displayShows(shows) {
   document.body.innerHTML = `
-    <div class="my-show">
-      <div class="my-show-title">${show.name}</div>
-      <div class="my-show-summary">${show.summary}</div>
-      ${show._embedded.seasons
-        .map((season) => {
-          // console.log(season);
-          return `<div class="my-show-season">Season ${season.number}</div>`;
-        })
-        .join("")}
+    <div class="my-shows">
+      ${shows.map((show) => getShowHTML(show.show)).join("")}
     </div>
   `;
-});
+}
+
+findShow("vacation")
+  .then(displayShows)
+  .catch((e) => console.log(`ERROR: ${e}`));
